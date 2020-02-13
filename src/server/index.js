@@ -2,7 +2,7 @@
 // const Home = require('./containers/Home/index')
 // 用了webpack之后，可以使用es-module的方式引入
 import express from 'express'
-import Home from './containers/Home'
+import Home from '../containers/Home'
 import React from 'react'
 import {renderToString} from 'react-dom/server'
 
