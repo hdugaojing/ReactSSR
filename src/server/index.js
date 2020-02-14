@@ -12,7 +12,7 @@ const app = express()
 // 如果访问静态文件，比如<script src='/index.js'></script> 就去根目录的public下面去找
 app.use(express.static('public'))
 
-app.get('/', (req, res) => {
+app.get('*', (req, res) => {
         const content = renderToString((
             // 服务端渲染需要获取浏览器的访问路径req.path
             <StaticRouter context={{}} location={req.path}>
