@@ -1,9 +1,11 @@
-import {createStore, applyMiddleware} from 'redux'
+import {createStore, applyMiddleware, combineReducers} from 'redux'
 import thunk from 'redux-thunk'
+import {reducer as homeReducer} from '../containers/Home/store'
 
-const reducer = (state = {name:'colin'}, action) => {
-    return state
-}
+const reducer = combineReducers({
+    home: homeReducer
+})
+
 /**
 此处有一个坑：
     由于store是单例，服务端上只有一个store，所有的用户用的store都是同一个，显然不合理
