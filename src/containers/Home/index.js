@@ -8,7 +8,9 @@ import {getHomeList} from './store/actions'
 class Home extends React.Component {
     // 服务端渲染不会执行componentDidMount
     componentDidMount(){
-        this.props.getHomeList()
+        if(!this.props.list.length){
+            this.props.getHomeList()
+        }
     }
     // getList(){
     //     const {list} = this.props

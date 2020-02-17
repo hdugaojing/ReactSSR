@@ -5,7 +5,7 @@ import express from 'express'
 import {matchRoutes} from 'react-router-config'
 import routes from '../Routes'
 import {render} from './utils'
-import getStore from '../store'
+import {getStore} from '../store'
 
 const app = express()
 // 如果访问静态文件，比如<script src='/index.js'></script> 就去根目录的public下面去找
