@@ -52,10 +52,11 @@ const mapStateToProps = state => ({
     list: state.home.list
 })
 
-const mapDispatchToProps = dispatch => ({
-    getHomeList(){
-        dispatch(getHomeList())
-    }
-})
+// const mapDispatchToProps = dispatch => ({
+//     getHomeList(){
+//         dispatch(getHomeList())
+//     }
+// })
+const mapDispatchToProps = {getHomeList}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home)
