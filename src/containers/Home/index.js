@@ -38,6 +38,10 @@ class Home extends React.Component {
     }
 }
 
+Home.loadData = () => {
+    // 这个函数负责在服务端渲染之前，把这个组件需要的数据提前加载好
+}
+
 // module.exports = {
 //     default: Home
 // }
