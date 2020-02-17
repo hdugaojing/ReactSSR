@@ -1,7 +1,7 @@
 import React from 'react'
 import {renderToString} from 'react-dom/server'
 // 服务端渲染路由需要使用StaticRouter
-import {StaticRouter, Route, matchPath} from 'react-router-dom'
+import {StaticRouter, Route} from 'react-router-dom'
 import {matchRoutes} from 'react-router-config'
 import routes from '../Routes'
 import getStore from '../store'
@@ -12,17 +12,10 @@ export const render = (req) => {
     /**
         如果在这里，能拿到异步数据，并填充在store之中，可以解决服务端无法执行componentDidMount，导致无法渲染列表的问题
      */
-    const matchRoutes = [] 
     // 根据路由路径，往store里加载数据
-    routes.some(route => {
-        const match = matchPath(req.path, route)
-        if(match){
-            matchRoutes.push(route)
-        }
-    })
+    const matchedRoutes = matchRoutes(routes, req.path)
     // 让matchRoutes里面所有组件对应的loadData方法执行一次
-    console.log(matchRoutes)
-
+    console.log(matchedRoutes)
     const content = renderToString((
         <Provider store={store}>
             {/* 服务端渲染需要获取浏览器的访问路径req.path */}
