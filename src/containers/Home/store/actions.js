@@ -9,8 +9,9 @@ const changeList = (list) => ({
 
 export const getHomeList = () => {
     // 返回一个promise
+    // http://localhost:3000/api.json'
     return (dispatch) => {
-        return axios.get('http://localhost:3000/api.json').then(res => {
+        return axios.get('/api/news.json').then(res => {
             const list = res.data.data
             dispatch(changeList(list))
         })
