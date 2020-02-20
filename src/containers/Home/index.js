@@ -9,7 +9,7 @@ class Home extends React.Component {
     // 服务端渲染不会执行componentDidMount
     componentDidMount(){
         if(!this.props.list.length){
-            this.props.getHomeList()
+            this.props.getHomeList(false)
         }
     }
     // getList(){
@@ -42,7 +42,7 @@ class Home extends React.Component {
 
 Home.loadData = (store) => {
     // 这个函数负责在服务端渲染之前，把这个组件需要的数据提前加载好
-    return store.dispatch(getHomeList())
+    return store.dispatch(getHomeList(true))
 }
 
 // module.exports = {
