@@ -21,7 +21,7 @@ app.use('/api',proxy('http://localhost:3000', {
   // req.url: news.json 
 
 app.get('*', (req, res) => {
-    const store = getStore()
+    const store = getStore(req)
     /**
         如果在这里，能拿到异步数据，并填充在store之中，可以解决服务端无法执行componentDidMount，导致无法渲染列表的问题
      */
