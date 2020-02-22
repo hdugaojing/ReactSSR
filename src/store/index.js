@@ -1,6 +1,8 @@
 import {createStore, applyMiddleware, combineReducers} from 'redux'
 import thunk from 'redux-thunk'
 import {reducer as homeReducer} from '../containers/Home/store'
+import clientAxios from '../client/request'
+import serverAxios from '../server/request'
 
 const reducer = combineReducers({
     home: homeReducer
@@ -12,11 +14,13 @@ const reducer = combineReducers({
     所以需要返回一个getStore函数，每个用户的store都是独立的
  */
 export const getStore = () => {
-    return createStore(reducer, applyMiddleware(thunk))
+    // 改变服务端的store内容，一定要使用serverAxios
+    return createStore(reducer, applyMiddleware(thunk.withExtraArgument(serverAxios)))
 }
 
 export const getClientStore = () => {
     const defaultState = window.context.state
+    // 改变客户端的store内容，一定要使用clientAxios
     // 将服务端渲染数据的结果作为客户端渲染数据的默认值——数据脱水
-    return createStore(reducer, defaultState, applyMiddleware(thunk))
+    return createStore(reducer, defaultState, applyMiddleware(thunk.withExtraArgument(clientAxios)))
 }
