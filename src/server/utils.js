@@ -3,15 +3,14 @@ import {renderToString} from 'react-dom/server'
 // 服务端渲染路由需要使用StaticRouter
 import {StaticRouter, Route} from 'react-router-dom'
 import {Provider} from 'react-redux'
+import {renderRoutes} from 'react-router-config'
 
 export const render = (store, routes, req) => {
     const content = renderToString((
         <Provider store={store}>
             {/* 服务端渲染需要获取浏览器的访问路径req.path */}
             <StaticRouter context={{}} location={req.path}>
-                {routes.map(route => (
-                    <Route {...route}/>
-                ))}
+                {renderRoutes(routes)}
             </StaticRouter>
         </Provider>
         

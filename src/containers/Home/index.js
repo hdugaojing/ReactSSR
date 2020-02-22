@@ -21,7 +21,6 @@ class Home extends React.Component {
     render(){
         return (
             <div>
-                <Header/>
                 <div>Home</div>
                 {/* 
                     renderToString只能渲染基础结构，无法渲染事件绑定————引入同构
