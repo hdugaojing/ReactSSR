@@ -35,9 +35,16 @@ app.get('*', (req, res) => {
         }
     })
     Promise.all(promises).then(() => {
-        // 把Home组件渲染成字符串返 回给浏览器
-        res.send(render(store, routes, req))
-    })
+        const context = {};
+        const html = render(store, routes, req, context)
+        if (context.NOT_FOUND){
+            res.status(404)
+            res.send(html)
+        }else{
+            // 把Home组件渲染成字符串返 回给浏览器
+            res.send(html)
+        }
+    }) 
 })
 
 app.listen(3000, () => console.log('Example app listening on port 3000!'))

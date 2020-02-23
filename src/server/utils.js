@@ -5,11 +5,11 @@ import {StaticRouter, Route} from 'react-router-dom'
 import {Provider} from 'react-redux'
 import {renderRoutes} from 'react-router-config'
 
-export const render = (store, routes, req) => {
+export const render = (store, routes, req, context) => {
     const content = renderToString((
         <Provider store={store}>
             {/* 服务端渲染需要获取浏览器的访问路径req.path */}
-            <StaticRouter context={{}} location={req.path}>
+            <StaticRouter context={context} location={req.path}>
                 {renderRoutes(routes)}
             </StaticRouter>
         </Provider>
