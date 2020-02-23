@@ -1,13 +1,13 @@
 import { CHANGE_LIST } from './constants'
 const defaultStatus = {
-    list: []
+    translationList: []
 }
 export default (state=defaultStatus, action) => {
     switch(action.type){
         case CHANGE_LIST:
             return {
                 ...state,
-                list: action.list
+                translationList: action.list
             }
         default:
             return state

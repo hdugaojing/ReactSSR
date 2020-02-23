@@ -12,12 +12,12 @@ class Home extends React.Component {
             this.props.getHomeList()
         }
     }
-    // getList(){
-    //     const {list} = this.props
-    //     return list.map((item) => {
-    //         <div key={item.id}>{item.title}</div>
-    //     })
-    // }
+    getList(){
+        const {list} = this.props
+        return list.map((item) => 
+            <div key={item.id}>{item.title}</div>
+        )
+    }
     render(){
         return (
             <div>
@@ -29,11 +29,7 @@ class Home extends React.Component {
                 <button onClick={() => {alert('click')}}>
                     Home
                 </button>
-                {
-                    this.props.list.map((item) => {
-                        return <div key={item.id}>{item.title}</div>
-                    })
-                }
+                {this.getList()}
             </div>
         )
     }

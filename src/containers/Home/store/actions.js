@@ -2,7 +2,7 @@ import { CHANGE_LIST } from './constants'
 
 // actionCreator
 const changeList = (list) => ({
-    type: 'CHANGE_LIST',
+    type: CHANGE_LIST,
     list
 })
 
