@@ -37,7 +37,13 @@ app.get('*', (req, res) => {
     Promise.all(promises).then(() => {
         const context = {};
         const html = render(store, routes, req, context)
-        if (context.NOT_FOUND){
+        
+        // StaticRouter发现组件有Redirect（Translation组件），会在context中注入相关信息
+        console.log(context);
+        if(context.action === 'REPLACE'){
+            // 服务端重定向
+            res.redirect(301,context.url)
+        }else if (context.NOT_FOUND){
             res.status(404)
             res.send(html)
         }else{
