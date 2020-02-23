@@ -14,6 +14,21 @@ const clientConfig = {
         filename: 'index.js',
         // __dirname为服务器根路径
         path: Path.resolve(__dirname,'public')
+    },
+    // 配置编译过程中的规则
+    module: {
+        rules: [{
+            test: /\.css?$/,
+            use: ['style-loader', {
+                loader:'css-loader',
+                options: {
+                    importLoaders: 1,
+                    modules: {
+                        localIdentName: "[name]-[local]-[hash:5]"
+                    }
+                }
+            }]
+        }]
     }
 }
 module.exports = merge(baseConfig, clientConfig)

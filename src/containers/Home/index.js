@@ -1,11 +1,18 @@
 // node下需要使用require——commonjs规范
 // const Reat = require('react')
 import React from 'react';
-import Header from '../../components/Header'
 import {connect} from 'react-redux'
 import {getHomeList} from './store/actions'
+import styles from './style.css'
 
 class Home extends React.Component {
+    componentWillMount(){
+        // 服务器端渲染
+        if(this.props.staticContext){
+            // 样式注入服务器端context
+            this.props.staticContext.css = styles._getCss()
+        }
+    }
     // 服务端渲染不会执行componentDidMount
     componentDidMount(){
         if(!this.props.list.length){
@@ -20,7 +27,7 @@ class Home extends React.Component {
     }
     render(){
         return (
-            <div>
+            <div className={styles.test}>
                 <div>Home</div>
                 {/* 
                     renderToString只能渲染基础结构，无法渲染事件绑定————引入同构
