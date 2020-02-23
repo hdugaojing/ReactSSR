@@ -23,11 +23,6 @@ class Translation extends React.Component {
         ): <Redirect to='/'/>
     }
 }
-
-Translation.loadData = (store) => {
-    return store.dispatch(getTranslationList())
-}
-
 const mapStateToProps = state => ({
     list: state.translation.translationList,
     login:state.header.login
@@ -37,4 +32,8 @@ const mapDispatchToProps = {
     getTranslationList
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Translation)
+const ExportTranslation = connect(mapStateToProps, mapDispatchToProps)(Translation)
+ExportTranslation.loadData = (store) => {
+    return store.dispatch(getTranslationList())
+}
+export default ExportTranslation
