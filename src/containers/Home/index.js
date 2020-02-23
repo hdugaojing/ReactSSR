@@ -10,7 +10,7 @@ class Home extends React.Component {
         // 服务器端渲染
         if(this.props.staticContext){
             // 样式注入服务器端context
-            this.props.staticContext.css = styles._getCss()
+            this.props.staticContext.css.push(styles._getCss())
         }
     }
     // 服务端渲染不会执行componentDidMount

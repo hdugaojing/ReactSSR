@@ -40,7 +40,9 @@ app.get('*', (req, res) => {
     })
     // 这里的Promise永远会正确执行then，哪怕有数据获取失败，也会加载获取数据成功的组件
     Promise.all(promises).then(() => {
-        const context = {};
+        const context = {
+            css: []
+        };
         const html = render(store, routes, req, context)
         
         // StaticRouter发现组件有Redirect（Translation组件），会在context中注入相关信息
