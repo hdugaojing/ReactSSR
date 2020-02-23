@@ -31,15 +31,19 @@ app.get('*', (req, res) => {
     const promises = [];
     matchedRoutes.forEach(item => {
         if(item.route.loadData){
-            promises.push(item.route.loadData(store))
+            const promise = new Promise((resolve, reject) => {
+                // 确保Promise.all(promises).then会执行
+                item.route.loadData(store).then(resolve).catch(resolve)
+            })
+            promises.push(promise)
         }
     })
+    // 这里的Promise永远会正确执行then，哪怕有数据获取失败，也会加载获取数据成功的组件
     Promise.all(promises).then(() => {
         const context = {};
         const html = render(store, routes, req, context)
         
         // StaticRouter发现组件有Redirect（Translation组件），会在context中注入相关信息
-        console.log(context);
         if(context.action === 'REPLACE'){
             // 服务端重定向
             res.redirect(301,context.url)
@@ -50,7 +54,7 @@ app.get('*', (req, res) => {
             // 把Home组件渲染成字符串返 回给浏览器
             res.send(html)
         }
-    }) 
+    })
 })
 
 app.listen(3000, () => console.log('Example app listening on port 3000!'))
